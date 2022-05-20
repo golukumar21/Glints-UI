@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="header">
+    <div class="logo">
+      <a _ngcontent-iyr-c41="" href="/">
+        <img src="assets/images/glints.webp" alt="fyle" class="logo-img" />
+      </a>
+    </div>
+  </div>
+  <div class="body">
+    <div class="row">
+      <div class="col-5">
+        <div class="form-group">
+          <h3>Welcome to Glints!</h3>
+          <p class="subtitle text-gray text-lg">Log in to your account</p>
+          <form
+            class="form-horizontal"
+            role="form"
+            autocomplete="off"
+            [formGroup]="loginForm"
+          >
+            <label>Email</label>
+            <input
+              type="email"
+              class="form-control"
+              placeholder="Email"
+              required
+              formControlName="email"
+              [ngClass]="{
+                invalidForm:
+                  loginForm.controls['email'].touched &&
+                  loginForm.controls['email'].invalid,
+                '':
+                  !loginForm.controls['email'].touched &&
+                  !loginForm.controls['email'].invalid
+              }"
+            />
+            <p
+              class="invalid"
+              *ngIf="
+                loginForm.controls['email'].invalid &&
+                (loginForm.controls['email'].dirty ||
+                  loginForm.controls['email'].touched)
+              "
+            >
+              Enter a valid Email id
+            </p>
+            <label>Password</label>
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Password"
+              formControlName="password"
+              [ngClass]="{
+                invalidForm:
+                  loginForm.controls['password'].touched &&
+                  loginForm.controls['password'].invalid,
+                '':
+                  !loginForm.controls['password'].touched &&
+                  !loginForm.controls['password'].invalid
+              }"
+            />
+            <p
+              class="invalid"
+              *ngIf="
+                loginForm.controls['password'].invalid &&
+                (loginForm.controls['password'].dirty ||
+                  loginForm.controls['password'].touched)
+              "
+            >
+              Required !
+            </p>
+          </form>
+        </div>
+        <div class="login-btn">
+          <button
+            class="btn btn-primary btn-lg text-uppercase"
+            (click)="login()"
+            [disabled]="loginForm.invalid"
+          >
+            LOG IN
+          </button>
+          <div class="forgot">Forgot password</div>
+        </div>
+        <p class="invalid" *ngIf="invalidUser">Incorrect Email/Password !</p>
+        <div class="create-new" (click)="navigateTo('/register')">
+          CREATE NEW ACCOUNT
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="onboarding-img">
+          <img src="assets/images/onboarding-1.png" alt="" class="img-flex" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

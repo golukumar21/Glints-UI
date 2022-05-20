@@ -1,0 +1,135 @@
+<div class="container">
+    <div class="header">
+      <div class="logo">
+        <a _ngcontent-iyr-c41="" href="/">
+          <img
+            src="assets/images/glints.webp"
+            alt="fyle"
+            class="logo-img"
+          />
+        </a>
+      </div>
+    </div>
+    <div class="body">
+      <div class="row">
+        <div class="col-5">
+          <div class="form-group">
+            <h3>Welcome to Glints!</h3>
+            <p class="subtitle text-gray text-lg">Create your account</p>
+            <form
+              class="form-horizontal"
+              role="form"
+              autocomplete="off"
+              [formGroup]="signUpForm"
+            >
+              <label>What's your full name?</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Full Name"
+                required
+                formControlName="fullName"
+                [ngClass]="{
+                  invalidForm:
+                    signUpForm.controls['fullName'].touched &&
+                    signUpForm.controls['fullName'].invalid,
+                  '':
+                    !signUpForm.controls['fullName'].touched &&
+                    !signUpForm.controls['fullName'].invalid
+                }"
+              />
+              <p
+                class="invalid"
+                *ngIf="
+                  signUpForm.controls['fullName'].invalid &&
+                  (signUpForm.controls['fullName'].dirty ||
+                    signUpForm.controls['fullName'].touched)
+                "
+              >
+                Required !
+              </p>
+              <label>Email</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Email"
+                required
+                formControlName="email"
+                [ngClass]="{
+                  invalidForm:
+                    signUpForm.controls['email'].touched &&
+                    signUpForm.controls['email'].invalid,
+                  '':
+                    !signUpForm.controls['email'].touched &&
+                    !signUpForm.controls['email'].invalid
+                }"
+              />
+              <p
+                class="invalid"
+                *ngIf="
+                  signUpForm.controls['email'].invalid &&
+                  (signUpForm.controls['email'].dirty ||
+                    signUpForm.controls['email'].touched)
+                "
+              >
+                Required !
+              </p>
+              <label>Password</label>
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Password"
+                formControlName="password"
+                [ngClass]="{
+                  invalidForm:
+                    signUpForm.controls['password'].touched &&
+                    signUpForm.controls['password'].invalid,
+                  '':
+                    !signUpForm.controls['password'].touched &&
+                    !signUpForm.controls['password'].invalid
+                }"
+              />
+              <p
+                class="invalid"
+                *ngIf="
+                  signUpForm.controls['password'].invalid &&
+                  (signUpForm.controls['password'].dirty ||
+                    signUpForm.controls['password'].touched)
+                "
+              >
+                Required !
+              </p>
+            </form>
+            <div class="terms-condition">
+              I agree to the <span>Terms of Service </span>and
+              <span>Privacy Policy.</span>
+            </div>
+          </div>
+          <div class="login-btn">
+            <button
+              class="btn btn-primary btn-lg text-uppercase"
+              (click)="registerUser()"
+              [disabled]="signUpForm.invalid"
+            >
+              CREATE ACCOUNT
+            </button>
+            <p class="user-registered" *ngIf="registered">
+              User Registered Successfully! Please login.
+            </p>
+            <p *ngIf="notRegistered" class="invalid">
+              User registration failed! Please try again!
+            </p>
+            <div class="login" class="create-new" (click)="navigateTo()">
+              ALREADY REGISTERED? LOG IN
+            </div>
+          </div>
+        </div>
+        <div class="col-5">
+          <div class="onboarding-img">
+            <img src="assets/images/onboarding-1.png" alt="" class="img-flex" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

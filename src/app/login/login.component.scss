@@ -1,0 +1,56 @@
+.header {
+  padding-bottom: 1rem !important;
+  .logo {
+    width: 250px;
+    padding: 10px;
+    img {
+      max-width: 100%;
+    }
+  }
+}
+.body {
+  padding: 10px;
+  .form-group {
+    margin-top: 45px;
+    .terms-condition {
+      span {
+        color: #007bff;
+        text-decoration: none;
+      }
+    }
+  }
+  label {
+    margin: 30px 0 0 0;
+  }
+  .login-btn {
+    display: flex;
+    justify-content: space-between;
+    .forgot {
+      color: #333;
+      cursor: pointer;
+      margin-top: 35px;
+      font-family: "Manrope-Bold";
+    }
+    button {
+      margin-top: 25px;
+      font-family: "Manrope-Medium";
+      box-shadow: none;
+      cursor: pointer;
+      margin-bottom: 25px;
+      padding: 10px 40px;
+    }
+  }
+  .create-new {
+    color: #212529;
+    cursor: pointer;
+    font-family: "Manrope-Bold";
+  }
+  .onboarding-img {
+    margin: 35px 0px 0px 45px;
+    img.img-flex {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+}

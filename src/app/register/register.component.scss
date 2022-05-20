@@ -1,0 +1,53 @@
+.header {
+  padding-bottom: 1rem !important;
+  .logo {
+    width: 250px;
+    padding: 10px;
+    img {
+      max-width: 100%;
+    }
+  }
+}
+.body {
+  padding: 10px;
+  .form-group {
+    margin-top: 45px;
+    .terms-condition {
+      margin-top: 25px;
+      span {
+        color: #007bff;
+        text-decoration: none;
+      }
+    }
+  }
+  label {
+    margin: 30px 0 0 0;
+  }
+  .login {
+    margin-top: 25px;
+    font-weight: 400;
+    color: #212529;
+    cursor: pointer;
+  }
+  button {
+    margin-top: 25px;
+    font-family: "Manrope-Medium";
+    box-shadow: none;
+    cursor: pointer;
+    padding: 10px 40px;
+  }
+  .onboarding-img {
+    margin: 35px 0px 0px 45px;
+    img.img-flex {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  .create-new {
+    color: #212529;
+    cursor: pointer;
+    font-family: "Manrope-Bold";
+    margin-top: 20px;
+  }
+}
