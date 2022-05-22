@@ -1,0 +1,91 @@
+.user-profile {
+  padding: 20px 0;
+  background: #fbfbfb;
+  h2 {
+    font-family: "Manrope-Bold";
+    font-size: 22px;
+    line-height: 24px;
+    margin-top: 0;
+    margin-bottom: 12px;
+  }
+  .profile {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    img {
+      max-width: 100%;
+      border-radius: 50%;
+    }
+    .edit-profile {
+      position: absolute;
+      right: 1px;
+      bottom: 1px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: none;
+      outline: none;
+      z-index: 1;
+      cursor: pointer;
+      &:before {
+        content: "";
+        background: url("../../../assets/images//profile/ic_edit_profile.svg")
+          no-repeat;
+        background-size: contain;
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+  .profile-details {
+    background: #ffffff;
+    padding: 25px 20px;
+    .save-cancel-btn {
+      text-align: right;
+      .update-btn.active {
+        background: #d3d3d3;
+        border: 1px solid #d3d3d3;
+        cursor: not-allowed;
+        pointer-events: none;
+      }
+      a,
+      a:hover {
+        margin: 10px;
+        padding: 10px 25px;
+        text-decoration: none;
+      }
+    }
+  }
+  .user-details {
+    position: relative;
+    display: block;
+    padding: 22px 0;
+    border-bottom: 1px solid rgb(170 174 187 / 16%);
+    .option {
+      position: absolute;
+      right: 0;
+      top: 65%;
+      transform: translateY(-50%);
+      /* width: 70px; */
+    }
+    .user-details .values {
+      font-family: "Manrope-Medium";
+      font-size: 14px;
+      line-height: 20px;
+      color: #2c2c2c;
+      display: inline-block;
+      width: 100%;
+      padding-right: 35px;
+    }
+    .text-right span {
+      display: none;
+      &.editable {
+        display: block;
+      }
+    }
+  }
+}

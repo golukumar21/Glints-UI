@@ -1,0 +1,166 @@
+<section class="user-profile">
+  <div class="container">
+    <h2>My Profile</h2>
+    <div class="profile-details">
+      <div class="profile">
+        <img
+          *ngIf="
+            userDetails.profile_picture === '' ||
+            userDetails.profile_picture === undefined
+          "
+          src="./assets/images/profile/ic_profile_default.svg"
+        />
+        <img
+          *ngIf="
+            userDetails.profile_picture != '' &&
+            userDetails.profile_picture != undefined
+          "
+          [src]="userDetails.profile_picture"
+        />
+
+        <label for="file" class="edit-profile" *ngIf="!enableEdit"></label>
+        <input
+          *ngIf="!enableEdit"
+          type="file"
+          id="file"
+          class="p-img-input"
+          (change)="handleFileInput($event)"
+        />
+      </div>
+      <div class="clearfix"></div>
+      <div class="personal-info mb-8">
+        <div class="user-details">
+          <p class="p-head">USER INFORMATION</p>
+          <span class="option" *ngIf="!enableEdit">
+            <!-- <button class="edit" (click)="editField()">Edit</button> -->
+            <button
+              class="modal-btn mw-105 br-blue bg-white text-blue"
+              (click)="editField()"
+            >
+              Edit
+            </button>
+          </span>
+        </div>
+        <form role="form" autocomplete="off" [formGroup]="personalDetailsForm">
+          <div class="personal-info mb-8">
+            <div class="user-details">
+              <div class="w-40 fl">
+                <span class="labels">Name</span>
+              </div>
+              <div class="w-60 fl text-right">
+                <span class="values Text" [class.editable]="!enableEdit">{{
+                  userDetails.fullname
+                }}</span>
+                <span
+                  class="values Input displayNone"
+                  [class.editable]="enableEdit"
+                >
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="InputBox form-control"
+                      placeholder="Enter your name"
+                      formControlName="fullname"
+                      [ngClass]="{
+                        invalidForm:
+                          personalDetailsForm.controls['fullname'].touched &&
+                          personalDetailsForm.controls['fullname'].invalid,
+                        '':
+                          !personalDetailsForm.controls['fullname'].touched &&
+                          !personalDetailsForm.controls['fullname'].invalid
+                      }"
+                    />
+                  </div>
+                  <p
+                    class="invalid"
+                    *ngIf="
+                      personalDetailsForm.controls['fullname'].invalid &&
+                      (personalDetailsForm.controls['fullname'].dirty ||
+                        personalDetailsForm.controls['fullname'].touched)
+                    "
+                  >
+                    Enter a valid Full Name
+                  </p>
+                </span>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="user-details">
+              <div class="w-40 fl">
+                <span class="labels">Age</span>
+              </div>
+              <div class="w-60 fl text-right">
+                <span
+                  class="values Text"
+                  *ngIf="!userDetails.age || userDetails.age === 'undefined'"
+                  [class.editable]="!enableEdit"
+                  >N/A</span
+                >
+                <span
+                  class="values Text"
+                  *ngIf="userDetails.age && userDetails.age !== 'undefined'"
+                  [class.editable]="!enableEdit"
+                  >{{ userDetails.age }}</span
+                >
+                <span
+                  class="values Input displayNone"
+                  [class.editable]="enableEdit"
+                >
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="InputBox form-control"
+                      placeholder="Enter Your Age"
+                      formControlName="age"
+                      [ngClass]="{
+                        invalidForm:
+                          personalDetailsForm.controls['age'].touched &&
+                          personalDetailsForm.controls['age'].invalid,
+                        '':
+                          !personalDetailsForm.controls['age'].touched &&
+                          !personalDetailsForm.controls['age'].invalid
+                      }"
+                      (keyup)="validateAge()"
+                      (blur)="validateAge()"
+                    />
+                  </div>
+                  <p
+                    class="invalid"
+                    *ngIf="
+                      personalDetailsForm.controls['age'].invalid &&
+                      (personalDetailsForm.controls['age'].dirty ||
+                        personalDetailsForm.controls['age'].touched)
+                    "
+                  >
+                    Enter Age (Age must be >= 18)
+                  </p>
+                </span>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="clearfix"></div>
+      <div class="save-cancel-btn">
+        <a
+          [class.active]="personalDetailsForm.invalid"
+          *ngIf="enableEdit"
+          target="_blank"
+          (click)="updateDetails()"
+          rel="nofollow"
+          class="btn-linked update-btn bg-blue text-white mt-6"
+        >
+          Update
+        </a>
+        <a
+          class="btn-linked bg-red text-white mt-6"
+          *ngIf="enableEdit"
+          (click)="cancelEdit()"
+        >
+          Cancel
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

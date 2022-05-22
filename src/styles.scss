@@ -1,250 +1,334 @@
 /* You can add global styles to this file, and also import other style files */
 * {
-    outline: none;
-  }
-  /*=========== Manrope ==============*/
-  @font-face {
-    font-family: "Manrope VF";
-    src: url("assets/fonts/manrope/variable/ManropeGX.ttf")
-      format("truetype-variations");
-    font-style: normal;
-    /* font-weight: 200 800;
+  outline: none;
+}
+/*=========== Manrope ==============*/
+@font-face {
+  font-family: "Manrope VF";
+  src: url("assets/fonts/manrope/variable/ManropeGX.ttf")
+    format("truetype-variations");
+  font-style: normal;
+  /* font-weight: 200 800;
         font-display: swap; */
-  }
-  @font-face {
-    font-family: "Manrope-ExtraBold";
-    src: url("assets/fonts/manrope/web/Manrope-ExtraBold.woff2") format("woff2"),
-      url("assets/fonts/manrope/ttf/Manrope-ExtraBold.ttf") format("truetype");
-    font-style: normal;
-    /* font-weight: 800;
+}
+@font-face {
+  font-family: "Manrope-ExtraBold";
+  src: url("assets/fonts/manrope/web/Manrope-ExtraBold.woff2") format("woff2"),
+    url("assets/fonts/manrope/ttf/Manrope-ExtraBold.ttf") format("truetype");
+  font-style: normal;
+  /* font-weight: 800;
         font-display: swap; */
-  }
-  @font-face {
-    font-family: "Manrope-Bold";
-    src: url("assets/fonts/manrope/web/Manrope-Bold.woff2") format("woff2"),
-      url("assets/fonts/manrope/ttf/Manrope-Bold.ttf") format("truetype");
-    font-style: normal;
-    /* font-weight: 700;
+}
+@font-face {
+  font-family: "Manrope-Bold";
+  src: url("assets/fonts/manrope/web/Manrope-Bold.woff2") format("woff2"),
+    url("assets/fonts/manrope/ttf/Manrope-Bold.ttf") format("truetype");
+  font-style: normal;
+  /* font-weight: 700;
         font-display: swap; */
-  }
-  @font-face {
-    font-family: "Manrope-SemiBold";
-    src: url("assets/fonts/manrope/web/Manrope-SemiBold.woff2") format("woff2"),
-      url("assets/fonts/manrope/ttf/Manrope-SemiBold.ttf") format("truetype");
-    font-style: normal;
-    /* font-weight: 600;
+}
+@font-face {
+  font-family: "Manrope-SemiBold";
+  src: url("assets/fonts/manrope/web/Manrope-SemiBold.woff2") format("woff2"),
+    url("assets/fonts/manrope/ttf/Manrope-SemiBold.ttf") format("truetype");
+  font-style: normal;
+  /* font-weight: 600;
         font-display: swap; */
-  }
-  @font-face {
-    font-family: "Manrope-Medium";
-    src: url("assets/fonts/manrope/web/Manrope-Medium.woff2") format("woff2"),
-      url("assets/fonts/manrope/ttf/Manrope-Medium.ttf") format("truetype");
-    font-style: normal;
-    /* font-weight: 500;
+}
+@font-face {
+  font-family: "Manrope-Medium";
+  src: url("assets/fonts/manrope/web/Manrope-Medium.woff2") format("woff2"),
+    url("assets/fonts/manrope/ttf/Manrope-Medium.ttf") format("truetype");
+  font-style: normal;
+  /* font-weight: 500;
         font-display: swap; */
-  }
-  @font-face {
-    font-family: "Manrope-Regular";
-    src: url("assets/fonts/manrope/web/Manrope-Regular.woff2") format("woff2"),
-      url("assets/fonts/manrope/ttf/Manrope-Regular.ttf") format("truetype");
-    font-style: normal;
-    /* font-weight: 400;
+}
+@font-face {
+  font-family: "Manrope-Regular";
+  src: url("assets/fonts/manrope/web/Manrope-Regular.woff2") format("woff2"),
+    url("assets/fonts/manrope/ttf/Manrope-Regular.ttf") format("truetype");
+  font-style: normal;
+  /* font-weight: 400;
         font-display: swap; */
-  }
-  @font-face {
-    font-family: "Manrope-Light";
-    src: url("assets/fonts/manrope/web/Manrope-Light.woff2") format("woff2"),
-      url("assets/fonts/manrope/ttf/Manrope-Light.ttf") format("truetype");
-    font-style: normal;
-    /* font-weight: 300;
+}
+@font-face {
+  font-family: "Manrope-Light";
+  src: url("assets/fonts/manrope/web/Manrope-Light.woff2") format("woff2"),
+    url("assets/fonts/manrope/ttf/Manrope-Light.ttf") format("truetype");
+  font-style: normal;
+  /* font-weight: 300;
         font-display: swap; */
-  }
-  @font-face {
-    font-family: "Manrope-ExtraLight";
-    src: url("assets/fonts/manrope/web/Manrope-ExtraLight.woff2") format("woff2"),
-      url("assets/fonts/manrope/ttf/Manrope-ExtraLight.ttf") format("truetype");
-    font-style: normal;
-    /* font-weight: 200;
+}
+@font-face {
+  font-family: "Manrope-ExtraLight";
+  src: url("assets/fonts/manrope/web/Manrope-ExtraLight.woff2") format("woff2"),
+    url("assets/fonts/manrope/ttf/Manrope-ExtraLight.ttf") format("truetype");
+  font-style: normal;
+  /* font-weight: 200;
         font-display: swap; */
-  }
-  
-  /*Declare Variable starts here.*/
-  
-  // Colors
-  $white: #ffffff;
-  $white2: #fafafb;
-  $offWhite: #f3f3f5;
-  $blue: #276ef1;
-  $lightBlue: #ebf4ff;
-  $lightBlue2: #eceef5;
-  $red: #eb5757;
-  $black: #000000;
-  $black2: #181c2d;
-  $semiBlue: #131a34;
-  $semiBlack2: #3c3c43;
-  $activeMenu: #323c61;
-  $gray: #b3b3b3;
-  $gray2: #6e7898;
-  $lightGray: #efeff1;
-  $lightGray2: #e1e1e1;
-  $transparentLightGray: #2b2f390a;
-  $transparentLightBlue: #dde4ef80;
-  $transparentLightBlue2: #aaaebb66;
-  $transparentBlack: #00000096;
-  
-  /*Functions/Mixins starts here.*/
-  @mixin margin($mt: 0px, $mr: 0px, $mb: 0px, $ml: 0px) {
-    margin: $mt $mr $mb $ml;
-  }
-  
-  @mixin padding($pt: 0px, $pr: 0px, $pb: 0px, $pl: 0px) {
-    padding: $pt $pr $pb $pl;
-  }
-  
-  @mixin position($pos) {
-    position: $pos;
-  }
-  
-  @mixin zIndex($index) {
-    z-index: $index;
-  }
-  @mixin itemOpacity($number) {
-    opacity: $number;
-  }
-  
-  p {
-    margin: 0;
-  }
-  
-  h3 {
-    font-family: "Manrope-Medium";
-  }
-  
-  p.subtitle {
-    font-family: "Manrope";
-  }
-  
-  .text-lg {
+}
+
+/*Declare Variable starts here.*/
+
+// Colors
+$white: #ffffff;
+$white2: #fafafb;
+$offWhite: #f3f3f5;
+$blue: #276ef1;
+$lightBlue: #ebf4ff;
+$lightBlue2: #eceef5;
+$red: #eb5757;
+$black: #000000;
+$black2: #181c2d;
+$semiBlue: #131a34;
+$semiBlack2: #3c3c43;
+$activeMenu: #323c61;
+$gray: #b3b3b3;
+$gray2: #6e7898;
+$lightGray: #efeff1;
+$lightGray2: #e1e1e1;
+$transparentLightGray: #2b2f390a;
+$transparentLightBlue: #dde4ef80;
+$transparentLightBlue2: #aaaebb66;
+$transparentBlack: #00000096;
+
+/*Functions/Mixins starts here.*/
+@mixin margin($mt: 0px, $mr: 0px, $mb: 0px, $ml: 0px) {
+  margin: $mt $mr $mb $ml;
+}
+
+@mixin padding($pt: 0px, $pr: 0px, $pb: 0px, $pl: 0px) {
+  padding: $pt $pr $pb $pl;
+}
+
+@mixin position($pos) {
+  position: $pos;
+}
+
+@mixin zIndex($index) {
+  z-index: $index;
+}
+@mixin itemOpacity($number) {
+  opacity: $number;
+}
+
+p {
+  margin: 0;
+}
+
+h3 {
+  font-family: "Manrope-Medium";
+}
+
+p.subtitle {
+  font-family: "Manrope";
+}
+
+.text-lg {
+  font-size: 18px;
+}
+
+.text-gray {
+  color: #a2a2a6;
+}
+
+.invalid,
+.invalidForm {
+  color: #eb5757;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: "Manrope";
+}
+
+.btn-primary {
+  background-color: #192451 !important;
+  border-color: #192451 !important;
+}
+
+.form-group {
+  label {
+    color: #192451;
+    font-weight: 700;
     font-size: 18px;
   }
-  
-  .text-gray {
-    color: #a2a2a6;
+  input.form-control {
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #aaa;
+    border-radius: 0;
+    padding-left: 0;
+    box-shadow: none;
   }
-  
-  .invalid,
-  .invalidForm {
-      color: #eb5757;
-      font-size: 13px;
-      font-weight: 500;
-      font-family: 'Manrope';
-    }
-  
-  .btn-primary {
-    background-color: #192451 !important;
-    border-color: #192451 !important;
-  }
-  
-  .form-group {
-    label {
-      color: #192451;
-      font-weight: 700;
-      font-size: 18px;
-    }
-    input.form-control {
-      outline: none;
-      border: none;
-      border-bottom: 1px solid #aaa;
-      border-radius: 0;
-      padding-left: 0;
-      box-shadow: none;
-    }
-  }
-  
-  /* Scrollbar style */
-  /* width */
-  ::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
-  }
-  /* Track */
-  
-  ::-webkit-scrollbar-track {
-    background: $white2;
-    border-radius: 10px;
-  }
-  /* Handle */
-  
-  ::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-  }
-  /* Handle on hover */
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.36);
-  }
-  
-  // Placeholder style
-  ::placeholder {
-    /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: $gray;
-    opacity: 1; /* Firefox */
-  }
-  
-  :-ms-input-placeholder {
-    /* Internet Explorer 10-11 */
-    color: $gray;
-  }
-  
-  ::-ms-input-placeholder {
-    /* Microsoft Edge */
-    color: $gray;
-  }
-  
-  // Predefined style
-  .pos-rel {
-    position: relative;
-  }
-  
-  .w-368 {
-    width: 368px;
-  }
-  .h-full {
-    height: 100vh;
-  }
-  .no-corner {
-    border-radius: 0 !important;
-  }
-  
-  .mw-105 {
-    min-width: 105px;
-  }
-  .br-blue {
-    border: 1px solid #276ef1;
-  }
-  .br-red {
-    border: 1px solid #eb5757;
-  }
-  .bg-red {
-    background: #eb5757;
-  }
-  .bg-blue {
-    background: #276ef1;
-  }
-  /* Chrome, Safari, Edge, Opera */
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  
-  /* Firefox */
-  input[type="number"] {
-    -moz-appearance: textfield;
-  }
-  
-  textarea {
-    resize: none;
-    min-height: 150px;
-  }
+}
+
+.p-head {
+  font-family: "Manrope-Bold";
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 0;
+  margin-top: 24px;
+}
+
+.p-img-input {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  right: 1px;
+  bottom: 5px;
+  opacity: 0;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.btn-linked,
+.btn-linked:hover {
+  display: inline-block;
+  border-radius: 8px;
+  font-family: "Manrope-ExtraBold";
+  padding: 15px 25px;
+  font-size: 16px;
+  line-height: 24px;
+  text-decoration: none !important;
+  cursor: pointer;
+  outline: 0;
+}
+
+.bg-red {
+  background: #eb5757;
+}
+.text-white {
+  color: #fff !important;
+}
+
+.form-control {
+  border: 1px solid #aeb0b6;
+  border-radius: 6px;
+}
+
+.br-blue {
+  border: 1px solid #276ef1;
+}
+
+.bg-white {
+  background: #fff;
+}
+
+.text-blue {
+  color: #276ef1 !important;
+}
+
+.modal-btn {
+  padding: 15px;
+  font-family: "Manrope-Bold";
+  font-size: 12px;
+  line-height: 10px;
+  border-radius: 8px;
+  outline: none;
+  text-decoration: none;
+}
+
+.mb-8 {
+  margin-bottom: 8px;
+}
+
+.w-40 {
+  width: 40%;
+}
+
+.w-60 {
+  width: 60%;
+}
+
+.fl {
+  float: left;
+}
+
+/* Scrollbar style */
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+/* Track */
+
+::-webkit-scrollbar-track {
+  background: $white2;
+  border-radius: 10px;
+}
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.36);
+}
+
+// Placeholder style
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: $gray;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: $gray;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: $gray;
+}
+
+// Predefined style
+.pos-rel {
+  position: relative;
+}
+
+.w-368 {
+  width: 368px;
+}
+.h-full {
+  height: 100vh;
+}
+.no-corner {
+  border-radius: 0 !important;
+}
+
+.mw-105 {
+  min-width: 105px;
+}
+.br-blue {
+  border: 1px solid #276ef1;
+}
+.br-red {
+  border: 1px solid #eb5757;
+}
+.bg-red {
+  background: #eb5757;
+}
+.bg-blue {
+  background: #276ef1;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+textarea {
+  resize: none;
+  min-height: 150px;
+}

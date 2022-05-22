@@ -1,0 +1,25 @@
+<header>
+  <div class="header">
+    <div class="container">
+      <div class="row">
+        <div class="logo col-xs-12 col-sm-12 col-md-4 col-lg-4">
+          <a class="logo-icon"
+            ><img src="assets/images/glints.webp" alt="fyle" class="logo-img"
+          /></a>
+        </div>
+        <div class="menu col-sm-8" *ngIf="showLogout">
+          <ul>
+            <li class="claim-user">
+              <a>
+                <span title="Kumar Abhishek" class="user-icon"
+                  >KA
+                  <span (click)="logout()" class="logout">Logout</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

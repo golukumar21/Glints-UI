@@ -1,0 +1,11 @@
+@use "../../styles.scss" as global;
+.app-cont {
+  .main-section {
+    display: flex;
+    flex-direction: row;
+    .dash-section {
+      width: 100vw;
+      height: 100vh;
+    }
+  }
+}

@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { DashboardComponent } from './dashboard.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   imports: [
@@ -13,6 +14,6 @@ import { DashboardComponent } from './dashboard.component';
     RouterModule.forChild([]),
   ],
   exports: [DashboardComponent],
-  declarations: [DashboardComponent],
+  declarations: [DashboardComponent, UserProfileComponent],
 })
 export class DashboardModule {}
