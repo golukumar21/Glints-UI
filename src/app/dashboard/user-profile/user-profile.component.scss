@@ -88,6 +88,20 @@
       }
     }
     .work-exp {
+      .work-ex-top {
+        display: flex;
+        justify-content: space-between;
+        img {
+          cursor: pointer;
+        }
+        h4 {
+          font-family: "Manrope-Bold";
+          font-size: 16px;
+          line-height: 32px;
+          margin-top: 0;
+          margin-bottom: 20px;
+        }
+      }
       .logo-wrapper {
         position: relative;
         .remove-img {
@@ -109,18 +123,37 @@
             }
           }
         }
-        .dPicker {
+        .date {
           position: relative;
-          &:after {
-            content: "";
-            background: url("../../../assets/images/ic_calendar.png") no-repeat;
-            width: 20px;
-            height: 20px;
-            position: absolute;
-            right: 20px;
-            top: 93px;
-            cursor: pointer;
+          .dpicker-icon {
+            &:after {
+              content: "";
+              background: url("../../../assets/images/ic_calendar.png")
+                no-repeat;
+              width: 20px;
+              height: 20px;
+              position: absolute;
+              right: 20px;
+              top: 40px;
+              cursor: pointer;
+            }
           }
+        }
+      }
+      .check-bar {
+        padding: 30px 5px;
+        cursor: pointer;
+        span {
+          margin: 10px;
+        }
+      }
+      .delete-icon {
+        position: relative;
+        img {
+          position: absolute;
+          right: 10px;
+          cursor: pointer;
+          width: 30px;
         }
       }
     }

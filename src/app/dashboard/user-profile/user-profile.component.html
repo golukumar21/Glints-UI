@@ -140,7 +140,10 @@
             </div>
             <div class="user-details">
               <div class="work-exp">
-                <h4>Work Experiences</h4>
+                <div class="work-ex-top">
+                  <h4>Work Experiences</h4>
+                  <img src="./assets/images/ic_add.svg" alt="" />
+                </div>
                 <div class="work-exp-det">
                   <div class="exp">
                     <div class="row">
@@ -182,14 +185,11 @@
                           required
                         />
                       </div>
-                      <div class="col-12 col-sm-12 col-md-2 col-lg-2 mb-4">
-                        <label class="form-label">
-                          Expiry date<span class="mandatory">*</span>
-                        </label>
+                      <div class="col-12 col-sm-12 col-md-2 col-lg-2 mb-4 date">
+                        <label class="form-label"> Start date </label>
                         <input
                           type="text"
                           class="form-control input-field"
-                          formControlName="expiryDate"
                           placeholder="-"
                           id="dPicker"
                           bsDatepicker
@@ -199,16 +199,48 @@
                           (click)="triggerDatePicker()"
                         ></span>
                       </div>
-                      <div
-                        class="col-12 col-sm-12 col-md-2 col-lg-2 mb-4"
-                      ></div>
-                      <div
-                        class="col-12 col-sm-12 col-md-2 col-lg-2 mb-4"
-                      ></div>
+                      <div class="col-12 col-sm-12 col-md-2 col-lg-2 mb-4 date">
+                        <label class="form-label"> End date </label>
+                        <input
+                          type="text"
+                          class="form-control input-field"
+                          placeholder="-"
+                          id="dPicker"
+                          bsDatepicker
+                        />
+                        <span
+                          class="dpicker-icon"
+                          (click)="triggerDatePicker()"
+                        ></span>
+                      </div>
+                      <div class="col-12 col-sm-12 col-md-2 col-lg-2 mb-4">
+                        <label for="currentJobCheck" class="check-bar mt-2">
+                          <input
+                            id="currentJobCheck"
+                            type="checkbox"
+                            name="purpose"
+                          />
+                          <span class="title">Current Job</span>
+                        </label>
+                      </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-4"></div>
-                      <div class="col-md-4"></div>
+                      <div
+                        class="col-12 col-sm-12 col-md-12 col-lg-12 mb-4 delete-icon"
+                      >
+                        <img src="./assets/images/delete-icon.svg" alt="" />
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-4">
+                        <label for="cname" class="form-label"
+                          >Job description</label
+                        >
+                        <angular-editor
+                          id="i"
+                          [config]="toolbarConfig"
+                        ></angular-editor>
+                      </div>
                     </div>
                   </div>
                 </div>

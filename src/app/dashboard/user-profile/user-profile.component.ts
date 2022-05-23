@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { editorConfiguration } from '../dashboard.constants';
 
 @Component({
   selector: 'app-user-profile',
@@ -12,6 +13,7 @@ import {
   styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
+  toolbarConfig = editorConfiguration;
   userDetails = {
     fullname: '',
     age: '',

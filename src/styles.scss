@@ -249,6 +249,11 @@ p.subtitle {
   float: left;
 }
 
+.angular-editor .angular-editor-wrapper .angular-editor-textarea {
+  resize: none;
+  height: 150px !important;
+}
+
 /* Scrollbar style */
 /* width */
 ::-webkit-scrollbar {
