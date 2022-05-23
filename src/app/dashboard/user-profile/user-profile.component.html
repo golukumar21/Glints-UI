@@ -142,16 +142,29 @@
               <div class="work-exp">
                 <div class="work-ex-top">
                   <h4>Work Experiences</h4>
-                  <img src="./assets/images/ic_add.svg" alt="" />
+                  <img
+                    (click)="addWorkExp()"
+                    src="./assets/images/ic_add.svg"
+                    alt=""
+                  />
                 </div>
-                <div class="work-exp-det">
-                  <div class="exp">
+                <div class="work-exp-det" formArrayName="workExp">
+                  <div
+                    class="exp"
+                    *ngFor="let we of workEx.controls; let i = index"
+                    [formGroupName]="i"
+                  >
+                  <h5>Experience {{i+1}}</h5>
                     <div class="row">
                       <div class="col-12 col-sm-12 col-md-2 col-lg-2 mb-4">
                         <p class="title">Company Logo</p>
                         <div class="uploader">
                           <span class="imgUpload">
-                            <input type="file" id="compImg" />
+                            <input
+                              type="file"
+                              id="compImg"
+                              formControlName="compLogo"
+                            />
                             <label for="img1"></label>
                           </span>
                         </div>
@@ -173,6 +186,7 @@
                           type="text"
                           class="form-control input-field"
                           required
+                          formControlName="companyName"
                         />
                       </div>
                       <div class="col-12 col-sm-12 col-md-2 col-lg-2 mb-4">
@@ -183,6 +197,7 @@
                           type="text"
                           class="form-control input-field"
                           required
+                          formControlName="jobTitle"
                         />
                       </div>
                       <div class="col-12 col-sm-12 col-md-2 col-lg-2 mb-4 date">
@@ -193,6 +208,7 @@
                           placeholder="-"
                           id="dPicker"
                           bsDatepicker
+                          formControlName="startDate"
                         />
                         <span
                           class="dpicker-icon"
@@ -207,6 +223,7 @@
                           placeholder="-"
                           id="dPicker"
                           bsDatepicker
+                          formControlName="endDate"
                         />
                         <span
                           class="dpicker-icon"
@@ -219,6 +236,7 @@
                             id="currentJobCheck"
                             type="checkbox"
                             name="purpose"
+                            formControlName="currentJobCheck"
                           />
                           <span class="title">Current Job</span>
                         </label>
@@ -228,7 +246,11 @@
                       <div
                         class="col-12 col-sm-12 col-md-12 col-lg-12 mb-4 delete-icon"
                       >
-                        <img src="./assets/images/delete-icon.svg" alt="" />
+                        <img
+                          (click)="deleteWorkExp(i)"
+                          src="./assets/images/delete-icon.svg"
+                          alt=""
+                        />
                       </div>
                     </div>
                     <div class="row">
@@ -239,6 +261,7 @@
                         <angular-editor
                           id="i"
                           [config]="toolbarConfig"
+                          formControlName="jobDescription"
                         ></angular-editor>
                       </div>
                     </div>

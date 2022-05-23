@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -43,6 +44,7 @@ export class UserProfileComponent implements OnInit {
       ]),
       workExp: this.fb.array([]),
     });
+    this.addWorkExp();
   }
 
   editField() {
@@ -71,6 +73,33 @@ export class UserProfileComponent implements OnInit {
       this.personalDetailsForm.controls['age'].setErrors(null);
       this.updateDetailsAPI(null);
     }
+  }
+
+  // Add new job experience fields
+  addWorkExp() {
+    const add = this.personalDetailsForm.get('workExp') as FormArray;
+    add.push(
+      this.fb.group({
+        compLogo: null,
+        companyName: null,
+        jobTitle: null,
+        startDate: null,
+        endDate: null,
+        currentJobCheck: false,
+        jobDescription: null,
+      })
+    );
+  }
+
+  // Remove job experience field
+  deleteWorkExp(index: number) {
+    const remove = this.personalDetailsForm.get('workExp') as FormArray;
+    remove.removeAt(index);
+  }
+
+  // Gets workExp form array controls
+  get workEx(): FormArray {
+    return this.personalDetailsForm.get('workExp') as FormArray;
   }
 
   cancelEdit() {
@@ -126,9 +155,7 @@ export class UserProfileComponent implements OnInit {
     // }, 15000);
   }
 
-  triggerDatePicker() {
-    
-  }
+  triggerDatePicker() {}
 
   handleFileInput(e: any) {
     let fileToUpload = e.target.files.item(0);
