@@ -138,6 +138,82 @@
               </div>
               <div class="clearfix"></div>
             </div>
+            <div class="user-details">
+              <div class="work-exp">
+                <h4>Work Experiences</h4>
+                <div class="work-exp-det">
+                  <div class="exp">
+                    <div class="row">
+                      <div class="col-12 col-sm-12 col-md-2 col-lg-2 mb-4">
+                        <p class="title">Company Logo</p>
+                        <div class="uploader">
+                          <span class="imgUpload">
+                            <input type="file" id="compImg" />
+                            <label for="img1"></label>
+                          </span>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="logo-wrapper">
+                          <img
+                            class="remove-img"
+                            src="./assets/images/ic_closeMenu.png"
+                            alt="Remove Image"
+                          />
+                          <img src="./assets/images/img_upload.png" />
+                        </div>
+                      </div>
+                      <div class="col-12 col-sm-12 col-md-2 col-lg-2 mb-4">
+                        <label for="testimonialName1" class="form-label"
+                          >Company</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control input-field"
+                          required
+                        />
+                      </div>
+                      <div class="col-12 col-sm-12 col-md-2 col-lg-2 mb-4">
+                        <label for="testimonialName1" class="form-label"
+                          >Job Title</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control input-field"
+                          required
+                        />
+                      </div>
+                      <div class="col-12 col-sm-12 col-md-2 col-lg-2 mb-4">
+                        <label class="form-label">
+                          Expiry date<span class="mandatory">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          class="form-control input-field"
+                          formControlName="expiryDate"
+                          placeholder="-"
+                          id="dPicker"
+                          bsDatepicker
+                        />
+                        <span
+                          class="dpicker-icon"
+                          (click)="triggerDatePicker()"
+                        ></span>
+                      </div>
+                      <div
+                        class="col-12 col-sm-12 col-md-2 col-lg-2 mb-4"
+                      ></div>
+                      <div
+                        class="col-12 col-sm-12 col-md-2 col-lg-2 mb-4"
+                      ></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4"></div>
+                      <div class="col-md-4"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </form>
       </div>

@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-user-profile',
@@ -19,10 +24,10 @@ export class UserProfileComponent implements OnInit {
   successHeading: any = '';
   successSubHeading: any = '';
   btnName: any = '';
-  constructor() {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.personalDetailsForm = new FormGroup({
+    this.personalDetailsForm = this.fb.group({
       fullname: new FormControl(null, [
         Validators.required,
         Validators.pattern('^[a-zA-Z ]+(s[a-zA-Z]+)?$'),
@@ -34,6 +39,7 @@ export class UserProfileComponent implements OnInit {
         Validators.email,
         Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
       ]),
+      workExp: this.fb.array([]),
     });
   }
 
@@ -116,6 +122,10 @@ export class UserProfileComponent implements OnInit {
     // setTimeout(() => {
     //   updateProfile.unsubscribe();
     // }, 15000);
+  }
+
+  triggerDatePicker() {
+    
   }
 
   handleFileInput(e: any) {

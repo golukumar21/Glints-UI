@@ -72,7 +72,7 @@
       transform: translateY(-50%);
       /* width: 70px; */
     }
-    .user-details .values {
+    .values {
       font-family: "Manrope-Medium";
       font-size: 14px;
       line-height: 20px;
@@ -85,6 +85,43 @@
       display: none;
       &.editable {
         display: block;
+      }
+    }
+    .work-exp {
+      .logo-wrapper {
+        position: relative;
+        .remove-img {
+          width: 20px;
+          height: 20px;
+          position: absolute;
+          right: 35px;
+          top: -10px;
+          cursor: pointer;
+        }
+      }
+      .work-exp-det {
+        .exp {
+          .uploader {
+            input {
+              position: absolute;
+              opacity: 0;
+              width: 0;
+            }
+          }
+        }
+        .dPicker {
+          position: relative;
+          &:after {
+            content: "";
+            background: url("../../../assets/images/ic_calendar.png") no-repeat;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            right: 20px;
+            top: 93px;
+            cursor: pointer;
+          }
+        }
       }
     }
   }
