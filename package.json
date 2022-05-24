@@ -6,8 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy": "gh-pages -d dist"
   },
+  "homepage": "https://golukumar21.github.io/glints/",
   "private": true,
   "dependencies": {
     "@angular/animations": "~13.2.0",
@@ -20,6 +22,7 @@
     "@angular/router": "~13.2.0",
     "@kolkov/angular-editor": "^2.0.0",
     "bootstrap": "^5.2.0-beta1",
+    "gh-pages": "^4.0.0",
     "ngx-spinner": "^13.1.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
