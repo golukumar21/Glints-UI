@@ -9,7 +9,7 @@
     "test": "ng test",
     "deploy": "gh-pages -d dist"
   },
-  "homepage": "https://golukumar21.github.io/glints/",
+  "homepage": "https://golukumar21.github.io/glints",
   "private": true,
   "dependencies": {
     "@angular/animations": "~13.2.0",
