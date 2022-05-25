@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { editorConfiguration } from '../dashboard.constants';
 
 @Component({
@@ -15,6 +16,7 @@ import { editorConfiguration } from '../dashboard.constants';
 })
 export class UserProfileComponent implements OnInit {
   toolbarConfig = editorConfiguration;
+  bsConfig?: Partial<BsDatepickerConfig>;
   userDetails = {
     fullname: '',
     age: '',
@@ -27,7 +29,7 @@ export class UserProfileComponent implements OnInit {
   successHeading: any = '';
   successSubHeading: any = '';
   btnName: any = '';
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, public render: Renderer2) {}
 
   ngOnInit(): void {
     this.personalDetailsForm = this.fb.group({
@@ -45,6 +47,14 @@ export class UserProfileComponent implements OnInit {
       workExp: this.fb.array([]),
     });
     this.addWorkExp();
+    this.bsConfig = Object.assign(
+      {},
+      {
+        containerClass: 'theme-dark-blue',
+        isAnimated: true,
+        dateInputFormat: 'DD-MMM-YYYY',
+      }
+    );
   }
 
   editField() {
@@ -155,7 +165,10 @@ export class UserProfileComponent implements OnInit {
     // }, 15000);
   }
 
-  triggerDatePicker() {}
+  triggerDatePicker(id: any, i: any) {
+    let el: any = this.render.selectRootElement('#' + id + i, true);
+    el.click();
+  }
 
   handleFileInput(e: any) {
     let fileToUpload = e.target.files.item(0);
