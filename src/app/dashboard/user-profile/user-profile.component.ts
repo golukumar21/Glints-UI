@@ -108,7 +108,7 @@ export class UserProfileComponent implements OnInit {
     const add = this.personalDetailsForm.get('workExp') as FormArray;
     add.push(
       this.fb.group({
-        compLogo: new FormControl('./assets/images/img_upload.png', Validators.required),
+        compLogo: new FormControl(null, Validators.required),
         companyName: new FormControl(null, Validators.required),
         jobTitle: new FormControl(null, Validators.required),
         startDate: new FormControl(null, Validators.required),
@@ -188,6 +188,7 @@ export class UserProfileComponent implements OnInit {
     const reader: any = new FileReader();
     let el = this.render.selectRootElement('#' + id + i, true);
     let file = e.target.files[0];
+    this.personalDetailsForm.value.workExp[i].compLogo = file;
     reader.readAsDataURL(file);
     reader.onload = (_event: any) => {
       el.src = URL.createObjectURL(file);
