@@ -49,7 +49,7 @@
               </div>
               <div class="w-60 fl text-right">
                 <span class="values Text" [class.editable]="!enableEdit">{{
-                  userDetails.fullname
+                  userDetails.fullName
                 }}</span>
                 <span
                   class="values Input displayNone"
@@ -60,23 +60,23 @@
                       type="text"
                       class="InputBox form-control"
                       placeholder="Enter your name"
-                      formControlName="fullname"
+                      formControlName="fullName"
                       [ngClass]="{
                         invalidForm:
-                          personalDetailsForm.controls['fullname'].touched &&
-                          personalDetailsForm.controls['fullname'].invalid,
+                          personalDetailsForm.controls['fullName'].touched &&
+                          personalDetailsForm.controls['fullName'].invalid,
                         '':
-                          !personalDetailsForm.controls['fullname'].touched &&
-                          !personalDetailsForm.controls['fullname'].invalid
+                          !personalDetailsForm.controls['fullName'].touched &&
+                          !personalDetailsForm.controls['fullName'].invalid
                       }"
                     />
                   </div>
                   <p
                     class="invalid"
                     *ngIf="
-                      personalDetailsForm.controls['fullname'].invalid &&
-                      (personalDetailsForm.controls['fullname'].dirty ||
-                        personalDetailsForm.controls['fullname'].touched)
+                      personalDetailsForm.controls['fullName'].invalid &&
+                      (personalDetailsForm.controls['fullName'].dirty ||
+                        personalDetailsForm.controls['fullName'].touched)
                     "
                   >
                     Enter a valid Full Name
@@ -162,8 +162,9 @@
                           <span class="imgUpload">
                             <input
                               type="file"
-                              id="compImg"
+                              id="compImg{{i}}"
                               formControlName="compLogo"
+                              (change)="uploadImage($event, i, 'compImg')"
                             />
                             <label for="img1"></label>
                           </span>
@@ -174,8 +175,12 @@
                             class="remove-img"
                             src="./assets/images/ic_closeMenu.png"
                             alt="Remove Image"
+                            (click)="removeImageupload('compImg', i)"
                           />
-                          <img src="./assets/images/img_upload.png" />
+                          <img
+                            src="./assets/images/img_upload.png"
+                            (click)="triggerImageupload('compImg', i)"
+                          />
                         </div>
                       </div>
                       <div class="col-12 col-sm-12 col-md-2 col-lg-2 mb-4">

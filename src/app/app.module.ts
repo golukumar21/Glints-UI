@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { HeaderComponent } from './common/header/header.component';
+import { ModalComponent } from './common/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { HeaderComponent } from './common/header/header.component';
     LoginComponent,
     RegisterComponent,
     HeaderComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,

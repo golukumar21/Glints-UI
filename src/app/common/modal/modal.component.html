@@ -1,0 +1,19 @@
+<ng-template #template>
+  <div class="container-fluid">
+    <div class="row cont">
+      <div class="col-md-12">
+        <img class="status-img" src="{{ imageSrc }}" alt="status" />
+        <h2>{{ heading }}</h2>
+        <p class="subtitle">{{ subHeading }}</p>
+        <a
+          target="_blank"
+          rel="nofollow"
+          class="btn-linked bg-blue text-white mt-6"
+          (click)="doneEvent(buttonName)"
+        >
+          {{ buttonName }}
+        </a>
+      </div>
+    </div>
+  </div>
+</ng-template>

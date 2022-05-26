@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { GeneralService } from 'src/app/service/general.service';
 import { editorConfiguration } from '../dashboard.constants';
 
 @Component({
@@ -17,8 +18,9 @@ import { editorConfiguration } from '../dashboard.constants';
 export class UserProfileComponent implements OnInit {
   toolbarConfig = editorConfiguration;
   bsConfig?: Partial<BsDatepickerConfig>;
+  userId: any = null;
   userDetails = {
-    fullname: '',
+    fullName: '',
     age: '',
     profile_picture: 'assets/images/profile/ic_userdefault.svg',
   };
@@ -29,23 +31,28 @@ export class UserProfileComponent implements OnInit {
   successHeading: any = '';
   successSubHeading: any = '';
   btnName: any = '';
-  constructor(private fb: FormBuilder, public render: Renderer2) {}
+  constructor(
+    private fb: FormBuilder,
+    public render: Renderer2,
+    private service: GeneralService
+  ) {}
 
   ngOnInit(): void {
     this.personalDetailsForm = this.fb.group({
-      fullname: new FormControl(null, [
+      fullName: new FormControl(null, [
         Validators.required,
         Validators.pattern('^[a-zA-Z ]+(s[a-zA-Z]+)?$'),
         Validators.minLength(3),
       ]),
       age: new FormControl(null, Validators.required),
-      email_id: new FormControl(null, [
-        Validators.required,
-        Validators.email,
-        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
-      ]),
+      // email_id: new FormControl(null, [
+      //   Validators.required,
+      //   Validators.email,
+      //   Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
+      // ]),
       workExp: this.fb.array([]),
     });
+    this.userId = this.service.getLocalStorage('userId');
     this.addWorkExp();
     this.bsConfig = Object.assign(
       {},
@@ -55,6 +62,22 @@ export class UserProfileComponent implements OnInit {
         dateInputFormat: 'DD-MMM-YYYY',
       }
     );
+  }
+
+  ngAfterViewInit() {
+    var data = {
+      userId: this.userId,
+    };
+    this.service.userDetails(data).subscribe((res: any) => {
+      if (res.status === 201) {
+        this.userDetails.fullName = res.body.user_details.fullName;
+        this.personalDetailsForm.controls['fullName'].setValue(
+          res.body.user_details.fullName
+        );
+      } else {
+        console.log('User Not Found', res.status);
+      }
+    });
   }
 
   editField() {
@@ -90,13 +113,13 @@ export class UserProfileComponent implements OnInit {
     const add = this.personalDetailsForm.get('workExp') as FormArray;
     add.push(
       this.fb.group({
-        compLogo: null,
-        companyName: null,
-        jobTitle: null,
-        startDate: null,
-        endDate: null,
-        currentJobCheck: false,
-        jobDescription: null,
+        compLogo: new FormControl(null, Validators.required),
+        companyName: new FormControl(null, Validators.required),
+        jobTitle: new FormControl(null, Validators.required),
+        startDate: new FormControl(null, Validators.required),
+        endDate: new FormControl(null, Validators.required),
+        currentJobCheck: new FormControl(false),
+        jobDescription: new FormControl(null),
       })
     );
   }
@@ -136,10 +159,11 @@ export class UserProfileComponent implements OnInit {
 
   updateDetailsAPI(file: any) {
     let dataParam = {
-      fullname: this.personalDetailsForm.controls['fullname'].value.trim(),
-      email_id: this.personalDetailsForm.controls['email_id'].value.trim(),
+      fullname: this.personalDetailsForm.controls['fullName'].value.trim(),
+      // email_id: this.personalDetailsForm.controls['email_id'].value.trim(),
       age: (this.personalDetailsForm.controls['age'].value + '').trim(),
       file: '',
+      workExp: this.personalDetailsForm.controls['workExp'].value,
     };
     if (file) {
       dataParam.file = file;
@@ -163,6 +187,23 @@ export class UserProfileComponent implements OnInit {
     // setTimeout(() => {
     //   updateProfile.unsubscribe();
     // }, 15000);
+  }
+
+  uploadImage(e: any, i: any, id: any) {
+    const reader: any = new FileReader();
+    let file = e.target.files[0];
+    reader.readAsDataURL(file);
+    reader.onload = (_event: any) => {};
+  }
+
+  triggerImageupload(id: any, i: any) {
+    let el = this.render.selectRootElement('#' + id + i, true);
+    el.click();
+  }
+
+  removeImageupload(id: any, i: any) {
+    let el = this.render.selectRootElement('#' + id + i, true);
+    el.value = null;
   }
 
   triggerDatePicker(id: any, i: any) {

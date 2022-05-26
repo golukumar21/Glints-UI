@@ -33,28 +33,23 @@ export class RegisterComponent implements OnInit {
   }
 
   registerUser() {
-    var fullName = this.signUpForm.controls['fullName'].value.trim();
-    var firstName = fullName.split(' ').slice(0, -1).join(' ');
-    var lastName = fullName.split(' ').slice(-1).join(' ');
     var data = {
-      firstName: firstName,
-      lastName: lastName,
+      fullName: this.signUpForm.controls['fullName'].value.trim(),
       email: this.signUpForm.controls['email'].value.trim(),
-      userName: this.signUpForm.controls['email'].value.trim(),
       password: this.signUpForm.controls['password'].value.trim(),
     };
     this.registered = true;
-    // this.service.register(data).subscribe(
-    //   (res: any) => {
-    //     this.registered = true;
-    //     this.notRegistered = false;
-    //   },
-    //   (err) => {
-    //     console.log('Failed to register user!', err);
-    //     this.registered = false;
-    //     this.notRegistered = true;
-    //   }
-    // );
+    this.service.register(data).subscribe(
+      (res: any) => {
+        this.registered = true;
+        this.notRegistered = false;
+      },
+      (err) => {
+        console.log('Failed to register user!', err);
+        this.registered = false;
+        this.notRegistered = true;
+      }
+    );
   }
 
   navigateTo() {

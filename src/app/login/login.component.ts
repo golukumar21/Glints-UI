@@ -31,22 +31,22 @@ export class LoginComponent implements OnInit {
       email: this.loginForm.controls['email'].value.trim(),
       password: this.loginForm.controls['password'].value,
     };
-    this.router.navigate(['/dashboard']);
-    // this.service.login(data).subscribe(
-    //   (res) => {
-    //     if (res.status === 201) {
-    //       this.invalidUser = false;
-    //       this.router.navigate(['/dashboard']);
-    //     } else {
-    //       console.log('User Not Found', res.status);
-    //       this.invalidUser = true;
-    //     }
-    //   },
-    //   (err) => {
-    //     console.log('Login error', err);
-    //     this.invalidUser = true;
-    //   }
-    // );
+    this.service.login(data).subscribe(
+      (res: any) => {
+        if (res.status === 201) {
+          this.invalidUser = false;
+          this.router.navigate(['/dashboard']);
+          this.service.setLocalStorage('userId', res.body ['userId']);
+        } else {
+          console.log('User Not Found', res.status);
+          this.invalidUser = true;
+        }
+      },
+      (err) => {
+        console.log('Login error', err);
+        this.invalidUser = true;
+      }
+    );
   }
 
   navigateTo(route: any) {
