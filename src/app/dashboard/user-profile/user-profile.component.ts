@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { GeneralService } from 'src/app/service/general.service';
 import { editorConfiguration } from '../dashboard.constants';
@@ -24,6 +25,7 @@ export class UserProfileComponent implements OnInit {
     age: '',
     profile_picture: 'assets/images/profile/ic_userdefault.svg',
   };
+  profilePicture: any = 'assets/images/profile/ic_userdefault.svg';
   personalDetailsForm!: FormGroup;
   enableUpdateBtn: boolean = false;
   enableEdit: boolean = false;
@@ -34,7 +36,8 @@ export class UserProfileComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public render: Renderer2,
-    private service: GeneralService
+    private service: GeneralService,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -213,8 +216,17 @@ export class UserProfileComponent implements OnInit {
   }
 
   handleFileInput(e: any) {
-    let fileToUpload = e.target.files.item(0);
-
+    const reader: any = new FileReader();
+    let file = e.target.files[0];
+    reader.readAsDataURL(file);
+    var self = this;
+    reader.onload = (_event: any) => {
+      this.profilePicture = self.sanitize(URL.createObjectURL(file));
+    };
     // this.updateDetailsAPI(fileToUpload);
+  }
+
+  sanitize(url: any) {
+    return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 }

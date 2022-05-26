@@ -8,14 +8,11 @@
             userDetails.profile_picture === '' ||
             userDetails.profile_picture === undefined
           "
-          src="./assets/images/profile/ic_profile_default.svg"
+          src="{{ profilePicture }}"
         />
         <img
-          *ngIf="
-            userDetails.profile_picture != '' &&
-            userDetails.profile_picture != undefined
-          "
-          [src]="userDetails.profile_picture"
+          *ngIf="profilePicture != '' && profilePicture != undefined"
+          [src]="profilePicture"
         />
 
         <label for="file" class="edit-profile" *ngIf="!enableEdit"></label>
@@ -162,7 +159,7 @@
                           <span class="imgUpload">
                             <input
                               type="file"
-                              id="compImg{{i}}"
+                              id="compImg{{ i }}"
                               formControlName="compLogo"
                               (change)="uploadImage($event, i, 'compImgVal')"
                             />
@@ -175,12 +172,14 @@
                             class="remove-img"
                             src="./assets/images/ic_closeMenu.png"
                             alt="Remove Image"
-                            (click)="removeImageupload('compImg', 'compImgVal', i)"
+                            (click)="
+                              removeImageupload('compImg', 'compImgVal', i)
+                            "
                           />
                           <img
                             [src]="'./assets/images/img_upload.png'"
                             class="compImage"
-                            id="compImgVal{{i}}"
+                            id="compImgVal{{ i }}"
                             (click)="triggerImageupload('compImg', i)"
                           />
                         </div>
