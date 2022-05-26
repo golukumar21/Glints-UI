@@ -164,7 +164,7 @@
                               type="file"
                               id="compImg{{i}}"
                               formControlName="compLogo"
-                              (change)="uploadImage($event, i, 'compImg')"
+                              (change)="uploadImage($event, i, 'compImgVal')"
                             />
                             <label for="img1"></label>
                           </span>
@@ -175,10 +175,12 @@
                             class="remove-img"
                             src="./assets/images/ic_closeMenu.png"
                             alt="Remove Image"
-                            (click)="removeImageupload('compImg', i)"
+                            (click)="removeImageupload('compImg', 'compImgVal', i)"
                           />
                           <img
-                            src="./assets/images/img_upload.png"
+                            [src]="'./assets/images/img_upload.png'"
+                            class="compImage"
+                            id="compImgVal{{i}}"
                             (click)="triggerImageupload('compImg', i)"
                           />
                         </div>

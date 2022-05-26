@@ -45,11 +45,6 @@ export class UserProfileComponent implements OnInit {
         Validators.minLength(3),
       ]),
       age: new FormControl(null, Validators.required),
-      // email_id: new FormControl(null, [
-      //   Validators.required,
-      //   Validators.email,
-      //   Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
-      // ]),
       workExp: this.fb.array([]),
     });
     this.userId = this.service.getLocalStorage('userId');
@@ -113,7 +108,7 @@ export class UserProfileComponent implements OnInit {
     const add = this.personalDetailsForm.get('workExp') as FormArray;
     add.push(
       this.fb.group({
-        compLogo: new FormControl(null, Validators.required),
+        compLogo: new FormControl('./assets/images/img_upload.png', Validators.required),
         companyName: new FormControl(null, Validators.required),
         jobTitle: new FormControl(null, Validators.required),
         startDate: new FormControl(null, Validators.required),
@@ -191,9 +186,12 @@ export class UserProfileComponent implements OnInit {
 
   uploadImage(e: any, i: any, id: any) {
     const reader: any = new FileReader();
+    let el = this.render.selectRootElement('#' + id + i, true);
     let file = e.target.files[0];
     reader.readAsDataURL(file);
-    reader.onload = (_event: any) => {};
+    reader.onload = (_event: any) => {
+      el.src = URL.createObjectURL(file);
+    };
   }
 
   triggerImageupload(id: any, i: any) {
@@ -201,9 +199,11 @@ export class UserProfileComponent implements OnInit {
     el.click();
   }
 
-  removeImageupload(id: any, i: any) {
+  removeImageupload(id: any, imgId: any, i: any) {
     let el = this.render.selectRootElement('#' + id + i, true);
+    let el1 = this.render.selectRootElement('#' + imgId + i, true);
     el.value = null;
+    el1.src = './assets/images/img_upload.png';
   }
 
   triggerDatePicker(id: any, i: any) {
