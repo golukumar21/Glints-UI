@@ -42,17 +42,7 @@ export class UserProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.personalDetailsForm = this.fb.group({
-      fullName: new FormControl(null, [
-        Validators.required,
-        Validators.pattern('^[a-zA-Z ]+(s[a-zA-Z]+)?$'),
-        Validators.minLength(3),
-      ]),
-      age: new FormControl(null, Validators.required),
-      work_exp: this.fb.array([]),
-    });
     this.userId = this.service.getLocalStorage('userId');
-    this.addWorkExp();
     this.bsConfig = Object.assign(
       {},
       {
@@ -61,25 +51,47 @@ export class UserProfileComponent implements OnInit {
         dateInputFormat: 'DD-MMM-YYYY',
       }
     );
+    this.getWorkExp();
   }
 
-  ngAfterViewInit() {
+  getWorkExp() {
     var data = {
       userId: this.userId,
     };
     this.service.userDetails(data).subscribe((res: any) => {
       this.userDetails.fullName = res.body.fullName;
       this.userDetails.age = res.body.age;
-      this.personalDetailsForm.controls['fullName'].setValue(res.body.fullName);
-      this.personalDetailsForm.controls['age'].setValue(res.body.age);
-      // this.personalDetailsForm.controls['work_exp'];
       if (res.body.work_exp.length > 0) {
-        this.personalDetailsForm = this.fb.group({
+        this.personalDetailsForm = new FormGroup({
+          fullName: new FormControl(res.body.fullName, [
+            Validators.required,
+            Validators.pattern('^[a-zA-Z ]+(s[a-zA-Z]+)?$'),
+            Validators.minLength(3),
+          ]),
+          age: new FormControl(res.body.age, Validators.required),
           work_exp: this.fb.array(
-            res.body['work_exp'].map((data: any) =>
-              this.generateWorkExpForm(data)
+            res.body.work_exp.map((exp: any) =>
+              this.fb.group({
+                comp_logo: new FormControl(exp['comp_logo'], Validators.required),
+                company_name: new FormControl(exp['company_name'], Validators.required),
+                job_title: new FormControl(exp['job_title'], Validators.required),
+                start_date: new FormControl(new Date(exp['start_date']), Validators.required),
+                end_date: new FormControl(new Date(exp['end_date'])),
+                current_job: new FormControl(exp['current_job']),
+                job_desc: new FormControl(exp['job_desc']),
+              })
             )
           ),
+        });
+      } else {
+        this.personalDetailsForm = new FormGroup({
+          fullName: new FormControl(null, [
+            Validators.required,
+            Validators.pattern('^[a-zA-Z ]+(s[a-zA-Z]+)?$'),
+            Validators.minLength(3),
+          ]),
+          age: new FormControl(null, Validators.required),
+          work_exp: this.fb.array([]),
         });
       }
     });
@@ -155,7 +167,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   // Add new job experience fields
-  addWorkExp() {
+  addWorkExp(data: any) {
     const add = this.personalDetailsForm.get('work_exp') as FormArray;
     add.push(
       this.fb.group({
@@ -164,10 +176,36 @@ export class UserProfileComponent implements OnInit {
         job_title: new FormControl(null, Validators.required),
         start_date: new FormControl(null, Validators.required),
         end_date: new FormControl(null, Validators.required),
-        current_job: new FormControl(false),
+        current_job: new FormControl(null),
         job_desc: new FormControl(null),
       })
     );
+    console.log(data);
+    // if (data.length) {
+    //   add.push(
+    //     this.fb.group({
+    //       comp_logo: new FormControl(data.company_logo, Validators.required),
+    //       company_name: new FormControl(data.company_name, Validators.required),
+    //       job_title: new FormControl(data.job_title, Validators.required),
+    //       start_date: new FormControl(data.start_date, Validators.required),
+    //       end_date: new FormControl(data.end_date, Validators.required),
+    //       current_job: new FormControl(data.current_job),
+    //       job_desc: new FormControl(data.company_logo),
+    //     })
+    //   );
+    // } else {
+    //   add.push(
+    //     this.fb.group({
+    //       comp_logo: new FormControl(null, Validators.required),
+    //       company_name: new FormControl(null, Validators.required),
+    //       job_title: new FormControl(null, Validators.required),
+    //       start_date: new FormControl(null, Validators.required),
+    //       end_date: new FormControl(null, Validators.required),
+    //       current_job: new FormControl(false),
+    //       job_desc: new FormControl(null),
+    //     })
+    //   );
+    // }
   }
 
   // Remove job experience field
@@ -236,10 +274,11 @@ export class UserProfileComponent implements OnInit {
     const reader: any = new FileReader();
     let el = this.render.selectRootElement('#' + id + i, true);
     let file = e.target.files[0];
-    this.personalDetailsForm.value.workExp[i].compLogo = file;
+    // this.personalDetailsForm.value.workExp[i].compLogo = file;
     reader.readAsDataURL(file);
+    var self = this;
     reader.onload = (_event: any) => {
-      el.src = URL.createObjectURL(file);
+      el.src = self.sanitize(URL.createObjectURL(file));
     };
   }
 
@@ -263,12 +302,19 @@ export class UserProfileComponent implements OnInit {
   handleFileInput(e: any) {
     const reader: any = new FileReader();
     let file = e.target.files[0];
-    reader.readAsDataURL(file);
+    console.log(reader.readAsDataURL(file))
     var self = this;
     reader.onload = (_event: any) => {
       this.profilePicture = self.sanitize(URL.createObjectURL(file));
     };
-    // this.updateDetailsAPI(fileToUpload);
+    // console.log(this.profilePicture);
+    // var data = {
+    //   userId: this.userId,
+    //   file: e.target.files[0]
+    // }
+    // this.service.updateProfilePic(data).subscribe((res: any) => {
+    //   console.log(res);
+    // });
   }
 
   sanitize(url: any) {

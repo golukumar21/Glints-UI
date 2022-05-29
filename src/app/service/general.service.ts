@@ -38,10 +38,24 @@ export class GeneralService {
     });
   }
 
+  public updateProfilePic(data: any) {
+    return this.http.put(
+      this.glints.userDetails + 'user_profile_picture',
+      data,
+      {
+        observe: 'response',
+      }
+    );
+  }
+
   public updateUserDetails(data: any) {
-    return this.http.put(this.glints.userDetails + 'user_details_update', data, {
-      observe: 'response',
-    });
+    return this.http.put(
+      this.glints.userDetails + 'user_details_update',
+      data,
+      {
+        observe: 'response',
+      }
+    );
   }
 
   public setLocalStorage(name: any, value: any) {

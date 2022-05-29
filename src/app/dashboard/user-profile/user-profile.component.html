@@ -57,7 +57,7 @@
                       type="text"
                       class="InputBox form-control"
                       placeholder="Enter your name"
-                      formControlName="fullName"
+                      [formControlName]="'fullName'"
                       [ngClass]="{
                         invalidForm:
                           personalDetailsForm.controls['fullName'].touched &&
@@ -108,7 +108,7 @@
                       type="text"
                       class="InputBox form-control"
                       placeholder="Enter Your Age"
-                      formControlName="age"
+                      [formControlName]="'age'"
                       [ngClass]="{
                         invalidForm:
                           personalDetailsForm.controls['age'].touched &&
@@ -140,7 +140,8 @@
                 <div class="work-ex-top">
                   <h4>Work Experiences</h4>
                   <img
-                    (click)="addWorkExp()"
+                    *ngIf="enableEdit"
+                    (click)="addWorkExp(null)"
                     src="./assets/images/ic_add.svg"
                     alt=""
                   />
@@ -160,7 +161,7 @@
                             <input
                               type="file"
                               id="compImg{{ i }}"
-                              formControlName="comp_logo"
+                              [formControlName]="'comp_logo'"
                               (change)="uploadImage($event, i, 'compImgVal')"
                             />
                             <label for="img1"></label>
@@ -192,7 +193,7 @@
                           type="text"
                           class="form-control input-field"
                           required
-                          formControlName="company_name"
+                          [formControlName]="'company_name'"
                         />
                       </div>
                       <div class="col-12 col-sm-12 col-md-2 col-lg-2 mb-4">
@@ -203,7 +204,7 @@
                           type="text"
                           class="form-control input-field"
                           required
-                          formControlName="job_title"
+                          [formControlName]="'job_title'"
                         />
                       </div>
                       <div class="col-12 col-sm-12 col-md-2 col-lg-2 mb-4 date">
@@ -215,7 +216,7 @@
                           id="startdPicker{{ i }}"
                           [bsConfig]="bsConfig"
                           bsDatepicker
-                          formControlName="start_date"
+                          [formControlName]="'start_date'"
                         />
                         <span
                           class="dpicker-icon"
@@ -231,7 +232,7 @@
                           id="endPicker{{ i }}"
                           [bsConfig]="bsConfig"
                           bsDatepicker
-                          formControlName="end_date"
+                          [formControlName]="'end_date'"
                         />
                         <span
                           class="dpicker-icon"
@@ -244,7 +245,7 @@
                             id="currentJobCheck"
                             type="checkbox"
                             name="purpose"
-                            formControlName="current_job"
+                            [formControlName]="'current_job'"
                           />
                           <span class="title">Current Job</span>
                         </label>
@@ -269,7 +270,7 @@
                         <angular-editor
                           id="i"
                           [config]="toolbarConfig"
-                          formControlName="job_desc"
+                          [formControlName]="'job_desc'"
                         ></angular-editor>
                       </div>
                     </div>
