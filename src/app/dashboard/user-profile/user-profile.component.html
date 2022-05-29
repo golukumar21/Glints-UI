@@ -255,7 +255,7 @@
                       <div
                         class="col-12 col-sm-12 col-md-12 col-lg-12 mb-4 delete-icon"
                       >
-                        <img
+                        <img *ngIf="enableEdit"
                           (click)="deleteWorkExp(i)"
                           src="./assets/images/delete-icon.svg"
                           alt=""
