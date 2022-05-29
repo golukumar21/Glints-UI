@@ -2,14 +2,15 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-const GLINTS_HOST = 'http://localhost:3000/';
+const GLINTS_HOST_LOCAL = 'http://localhost:3000/';
+const GLINT_HOST_SERVER = 'https://us-central1-glints-node-api.cloudfunctions.net/app/';
 
 export const environment = {
   production: false,
   GLINTS: {
-    register: GLINTS_HOST + 'user/signup',
-    login: GLINTS_HOST + 'user/login',
-    userDetails: GLINTS_HOST + 'user/user_details',
+    register: GLINTS_HOST_LOCAL + 'register',
+    login: GLINTS_HOST_LOCAL + 'login',
+    userDetails: GLINTS_HOST_LOCAL,
   },
 };
 /*

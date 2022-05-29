@@ -145,7 +145,7 @@
                     alt=""
                   />
                 </div>
-                <div class="work-exp-det" formArrayName="workExp">
+                <div class="work-exp-det" formArrayName="work_exp">
                   <div
                     class="exp"
                     *ngFor="let we of workEx.controls; let i = index"
@@ -160,7 +160,7 @@
                             <input
                               type="file"
                               id="compImg{{ i }}"
-                              formControlName="compLogo"
+                              formControlName="comp_logo"
                               (change)="uploadImage($event, i, 'compImgVal')"
                             />
                             <label for="img1"></label>
@@ -192,7 +192,7 @@
                           type="text"
                           class="form-control input-field"
                           required
-                          formControlName="companyName"
+                          formControlName="company_name"
                         />
                       </div>
                       <div class="col-12 col-sm-12 col-md-2 col-lg-2 mb-4">
@@ -203,7 +203,7 @@
                           type="text"
                           class="form-control input-field"
                           required
-                          formControlName="jobTitle"
+                          formControlName="job_title"
                         />
                       </div>
                       <div class="col-12 col-sm-12 col-md-2 col-lg-2 mb-4 date">
@@ -215,7 +215,7 @@
                           id="startdPicker{{ i }}"
                           [bsConfig]="bsConfig"
                           bsDatepicker
-                          formControlName="startDate"
+                          formControlName="start_date"
                         />
                         <span
                           class="dpicker-icon"
@@ -231,7 +231,7 @@
                           id="endPicker{{ i }}"
                           [bsConfig]="bsConfig"
                           bsDatepicker
-                          formControlName="endDate"
+                          formControlName="end_date"
                         />
                         <span
                           class="dpicker-icon"
@@ -244,7 +244,7 @@
                             id="currentJobCheck"
                             type="checkbox"
                             name="purpose"
-                            formControlName="currentJobCheck"
+                            formControlName="current_job"
                           />
                           <span class="title">Current Job</span>
                         </label>
@@ -269,7 +269,7 @@
                         <angular-editor
                           id="i"
                           [config]="toolbarConfig"
-                          formControlName="jobDescription"
+                          formControlName="job_desc"
                         ></angular-editor>
                       </div>
                     </div>

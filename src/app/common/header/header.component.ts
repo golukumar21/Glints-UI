@@ -23,8 +23,8 @@ export class HeaderComponent implements OnInit {
             userId: userId,
           };
           this.service.userDetails(data).subscribe((res: any) => {
-            if (res.status === 201) {
-              this.userName = res.body.user_details.fullName;
+            if (res.status === 200) {
+              this.userName = res.body.fullName;
               this.shortName = getUserInitials(this.userName);
             } else {
               console.log('User Not Found', res.status);

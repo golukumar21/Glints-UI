@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { timeout } from 'rxjs';
 import { GeneralService } from 'src/app/service/general.service';
 import { editorConfiguration } from '../dashboard.constants';
 
@@ -48,7 +49,7 @@ export class UserProfileComponent implements OnInit {
         Validators.minLength(3),
       ]),
       age: new FormControl(null, Validators.required),
-      workExp: this.fb.array([]),
+      work_exp: this.fb.array([]),
     });
     this.userId = this.service.getLocalStorage('userId');
     this.addWorkExp();
@@ -67,14 +68,61 @@ export class UserProfileComponent implements OnInit {
       userId: this.userId,
     };
     this.service.userDetails(data).subscribe((res: any) => {
-      if (res.status === 201) {
-        this.userDetails.fullName = res.body.user_details.fullName;
-        this.personalDetailsForm.controls['fullName'].setValue(
-          res.body.user_details.fullName
-        );
-      } else {
-        console.log('User Not Found', res.status);
+      this.userDetails.fullName = res.body.fullName;
+      this.userDetails.age = res.body.age;
+      this.personalDetailsForm.controls['fullName'].setValue(res.body.fullName);
+      this.personalDetailsForm.controls['age'].setValue(res.body.age);
+      // this.personalDetailsForm.controls['work_exp'];
+      if (res.body.work_exp.length > 0) {
+        this.personalDetailsForm = this.fb.group({
+          work_exp: this.fb.array(
+            res.body['work_exp'].map((data: any) =>
+              this.generateWorkExpForm(data)
+            )
+          ),
+        });
       }
+    });
+  }
+
+  generateWorkExpForm(data: any) {
+    return this.fb.group({
+      company_name: this.fb.control(
+        {
+          value: data.company_name,
+          disabled: false,
+        },
+        Validators.required
+      ),
+      current_job: this.fb.control({
+        value: data.current_job,
+        disabled: false,
+      }),
+      end_date: this.fb.control({
+        value: new Date(data.end_date),
+        disabled: false,
+      }),
+      start_date: this.fb.control(
+        {
+          value: new Date(data.start_date),
+          disabled: false,
+        },
+        Validators.required
+      ),
+      job_title: this.fb.control(
+        {
+          value: data.job_title,
+          disabled: false,
+        },
+        Validators.required
+      ),
+      job_desc: this.fb.control(
+        {
+          value: data.job_desc,
+          disabled: false,
+        },
+        Validators.required
+      ),
     });
   }
 
@@ -108,29 +156,29 @@ export class UserProfileComponent implements OnInit {
 
   // Add new job experience fields
   addWorkExp() {
-    const add = this.personalDetailsForm.get('workExp') as FormArray;
+    const add = this.personalDetailsForm.get('work_exp') as FormArray;
     add.push(
       this.fb.group({
-        compLogo: new FormControl(null, Validators.required),
-        companyName: new FormControl(null, Validators.required),
-        jobTitle: new FormControl(null, Validators.required),
-        startDate: new FormControl(null, Validators.required),
-        endDate: new FormControl(null, Validators.required),
-        currentJobCheck: new FormControl(false),
-        jobDescription: new FormControl(null),
+        comp_logo: new FormControl(null, Validators.required),
+        company_name: new FormControl(null, Validators.required),
+        job_title: new FormControl(null, Validators.required),
+        start_date: new FormControl(null, Validators.required),
+        end_date: new FormControl(null, Validators.required),
+        current_job: new FormControl(false),
+        job_desc: new FormControl(null),
       })
     );
   }
 
   // Remove job experience field
   deleteWorkExp(index: number) {
-    const remove = this.personalDetailsForm.get('workExp') as FormArray;
+    const remove = this.personalDetailsForm.get('work_exp') as FormArray;
     remove.removeAt(index);
   }
 
   // Gets workExp form array controls
   get workEx(): FormArray {
-    return this.personalDetailsForm.get('workExp') as FormArray;
+    return this.personalDetailsForm.get('work_exp') as FormArray;
   }
 
   cancelEdit() {
@@ -157,34 +205,31 @@ export class UserProfileComponent implements OnInit {
 
   updateDetailsAPI(file: any) {
     let dataParam = {
+      userId: this.userId,
       fullname: this.personalDetailsForm.controls['fullName'].value.trim(),
       // email_id: this.personalDetailsForm.controls['email_id'].value.trim(),
       age: (this.personalDetailsForm.controls['age'].value + '').trim(),
       file: '',
-      workExp: this.personalDetailsForm.controls['workExp'].value,
+      workExp: this.personalDetailsForm.controls['work_exp'].value,
     };
     if (file) {
       dataParam.file = file;
     }
     console.log('Personal Details', dataParam);
-    // const updateProfile = this.service
-    //   .updateProfile(dataParam)
-    //   .pipe(timeout(15000))
-    //   .subscribe(
-    //     (res) => {
-    //       this.afterUserProfileUpdate(res);
-    //     },
-    //     (error) => {
-    //       if (error.name === 'TimeoutError') {
-    //         this.timeout();
-    //       } else {
-    //         this.afterUserProfileUpdate(error.error.text);
-    //       }
-    //     }
-    //   );
-    // setTimeout(() => {
-    //   updateProfile.unsubscribe();
-    // }, 15000);
+    const updateProfile = this.service
+      .updateUserDetails(dataParam)
+      .pipe(timeout(15000))
+      .subscribe(
+        (res) => {
+          console.log(res);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    setTimeout(() => {
+      updateProfile.unsubscribe();
+    }, 15000);
   }
 
   uploadImage(e: any, i: any, id: any) {

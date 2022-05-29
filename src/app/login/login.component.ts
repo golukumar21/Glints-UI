@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     };
     this.service.login(data).subscribe(
       (res: any) => {
-        if (res.status === 201) {
+        if (res.status === 200) {
           this.invalidUser = false;
           this.router.navigate(['/dashboard']);
           this.service.setLocalStorage('userId', res.body ['userId']);

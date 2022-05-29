@@ -33,7 +33,13 @@ export class GeneralService {
   }
 
   public userDetails(data: any) {
-    return this.http.post(this.glints.userDetails, data, {
+    return this.http.get(this.glints.userDetails + data.userId, {
+      observe: 'response',
+    });
+  }
+
+  public updateUserDetails(data: any) {
+    return this.http.put(this.glints.userDetails + 'user_details_update', data, {
       observe: 'response',
     });
   }
