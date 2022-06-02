@@ -34,6 +34,7 @@ export class UserProfileComponent implements OnInit {
   successHeading: any = '';
   successSubHeading: any = '';
   btnName: any = '';
+  profilePicFile: any;
   constructor(
     private fb: FormBuilder,
     public render: Renderer2,
@@ -68,21 +69,37 @@ export class UserProfileComponent implements OnInit {
             Validators.pattern('^[a-zA-Z ]+(s[a-zA-Z]+)?$'),
             Validators.minLength(3),
           ]),
-          age: new FormControl(res.body.age, Validators.required),
+          age: new FormControl(res.body.age),
           work_exp: this.fb.array(
             res.body.work_exp.map((exp: any) =>
               this.fb.group({
-                comp_logo: new FormControl(exp['comp_logo'], Validators.required),
-                company_name: new FormControl(exp['company_name'], Validators.required),
-                job_title: new FormControl(exp['job_title'], Validators.required),
-                start_date: new FormControl(new Date(exp['start_date']), Validators.required),
+                comp_logo: new FormControl(exp['comp_logo']),
+                company_name: new FormControl(
+                  exp['company_name'],
+                  Validators.required
+                ),
+                job_title: new FormControl(
+                  exp['job_title'],
+                  Validators.required
+                ),
+                start_date: new FormControl(
+                  new Date(exp['start_date']),
+                  Validators.required
+                ),
                 end_date: new FormControl(new Date(exp['end_date'])),
-                current_job: new FormControl(exp['current_job']),
+                current_job: new FormControl(exp['current_job'], [Validators.required]),
                 job_desc: new FormControl(exp['job_desc']),
               })
             )
           ),
         });
+        setTimeout(() => {
+          res.body.work_exp.forEach((item: any, i: any) => {
+            let el: any = document.getElementById('compImgVal' + i);
+            console.log(el);
+            el.src = item.comp_logo;
+          });
+        }, 1000);
       } else {
         this.personalDetailsForm = new FormGroup({
           fullName: new FormControl(null, [
@@ -90,7 +107,7 @@ export class UserProfileComponent implements OnInit {
             Validators.pattern('^[a-zA-Z ]+(s[a-zA-Z]+)?$'),
             Validators.minLength(3),
           ]),
-          age: new FormControl(null, Validators.required),
+          age: new FormControl(null),
           work_exp: this.fb.array([]),
         });
       }
@@ -171,7 +188,7 @@ export class UserProfileComponent implements OnInit {
     const add = this.personalDetailsForm.get('work_exp') as FormArray;
     add.push(
       this.fb.group({
-        comp_logo: new FormControl(null, Validators.required),
+        comp_logo: new FormControl(null),
         company_name: new FormControl(null, Validators.required),
         job_title: new FormControl(null, Validators.required),
         start_date: new FormControl(null, Validators.required),
@@ -217,6 +234,20 @@ export class UserProfileComponent implements OnInit {
   // Gets workExp form array controls
   get workEx(): FormArray {
     return this.personalDetailsForm.get('work_exp') as FormArray;
+  }
+
+  currentJobSet(e: any, i: any) {}
+
+  compareTwoDates() {
+    if (
+      new Date(this.personalDetailsForm.controls['start_date'].value) <
+      new Date(this.personalDetailsForm.controls['end_date'].value)
+    ) {
+      return false;
+      //  this.error={isError:true,errorMessage:'End Date can't before start date'};
+    } else {
+      return true;
+    }
   }
 
   cancelEdit() {
@@ -270,7 +301,7 @@ export class UserProfileComponent implements OnInit {
     }, 15000);
   }
 
-  uploadImage(e: any, i: any, id: any) {
+  uploadCompanyLogo(e: any, i: any, id: any) {
     const reader: any = new FileReader();
     let el = this.render.selectRootElement('#' + id + i, true);
     let file = e.target.files[0];
@@ -278,8 +309,29 @@ export class UserProfileComponent implements OnInit {
     reader.readAsDataURL(file);
     var self = this;
     reader.onload = (_event: any) => {
-      el.src = self.sanitize(URL.createObjectURL(file));
+      el.src = URL.createObjectURL(file);
+      this.personalDetailsForm.value.work_exp[i].comp_logo =
+        URL.createObjectURL(file);
     };
+  }
+
+  handleFileInput(e: any) {
+    const reader: any = new FileReader();
+    let file = e.target.files[0];
+    var self = this;
+    reader.onload = (_event: any) => {
+      this.profilePicture = self.sanitize(URL.createObjectURL(file));
+    };
+    this.profilePicFile = e.target.files[0];
+    var data = {
+      userId: this.userId,
+      file: this.profilePicFile,
+    };
+    console.log(data);
+    // this.service.updateProfilePic(data).subscribe((res: any) => {
+    //   e.currentTarget.value = null;
+    //   console.log(res);
+    // });
   }
 
   triggerImageupload(id: any, i: any) {
@@ -297,24 +349,6 @@ export class UserProfileComponent implements OnInit {
   triggerDatePicker(id: any, i: any) {
     let el: any = this.render.selectRootElement('#' + id + i, true);
     el.click();
-  }
-
-  handleFileInput(e: any) {
-    const reader: any = new FileReader();
-    let file = e.target.files[0];
-    console.log(reader.readAsDataURL(file))
-    var self = this;
-    reader.onload = (_event: any) => {
-      this.profilePicture = self.sanitize(URL.createObjectURL(file));
-    };
-    // console.log(this.profilePicture);
-    // var data = {
-    //   userId: this.userId,
-    //   file: e.target.files[0]
-    // }
-    // this.service.updateProfilePic(data).subscribe((res: any) => {
-    //   console.log(res);
-    // });
   }
 
   sanitize(url: any) {

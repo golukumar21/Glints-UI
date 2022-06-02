@@ -38,8 +38,11 @@ export class GeneralService {
     });
   }
 
-  public updateProfilePic(data: any) {
-    return this.http.put(
+  public updateProfilePic(formData: any) {
+    var data = new FormData();
+    data.append('userId', formData.userId);
+    data.append('profile_picture', formData.profile_picture);
+    return this.http.post(
       this.glints.userDetails + 'user_profile_picture',
       data,
       {
@@ -48,13 +51,10 @@ export class GeneralService {
     );
   }
 
-  public updateUserDetails(data: any) {
+  public updateUserDetails(formData: any) {
     return this.http.put(
       this.glints.userDetails + 'user_details_update',
-      data,
-      {
-        observe: 'response',
-      }
+      formData
     );
   }
 

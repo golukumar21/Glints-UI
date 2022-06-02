@@ -37,8 +37,8 @@ export class RegisterComponent implements OnInit {
       fullName: this.signUpForm.controls['fullName'].value.trim(),
       email: this.signUpForm.controls['email'].value.trim(),
       password: this.signUpForm.controls['password'].value.trim(),
-      profile_picture: null,
-      work_exp: [],
+      profile_picture: '',
+      work_exp: '',
     };
     this.registered = true;
     this.service.register(data).subscribe(

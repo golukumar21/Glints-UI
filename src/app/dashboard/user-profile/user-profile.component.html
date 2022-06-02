@@ -15,9 +15,8 @@
           [src]="profilePicture"
         />
 
-        <label for="file" class="edit-profile" *ngIf="!enableEdit"></label>
+        <label for="file" class="edit-profile"></label>
         <input
-          *ngIf="!enableEdit"
           type="file"
           id="file"
           class="p-img-input"
@@ -162,7 +161,7 @@
                               type="file"
                               id="compImg{{ i }}"
                               [formControlName]="'comp_logo'"
-                              (change)="uploadImage($event, i, 'compImgVal')"
+                              (change)="uploadCompanyLogo($event, i, 'compImgVal')"
                             />
                             <label for="img1"></label>
                           </span>
@@ -240,12 +239,13 @@
                         ></span>
                       </div>
                       <div class="col-12 col-sm-12 col-md-2 col-lg-2 mb-4">
-                        <label for="currentJobCheck" class="check-bar mt-2">
+                        <label for="currentJobCheck{{i}}" class="check-bar mt-2">
                           <input
-                            id="currentJobCheck"
+                            id="currentJobCheck{{i}}"
                             type="checkbox"
                             name="purpose"
                             [formControlName]="'current_job'"
+                            (change)="currentJobSet($event, i)"
                           />
                           <span class="title">Current Job</span>
                         </label>
@@ -284,7 +284,6 @@
       <div class="clearfix"></div>
       <div class="save-cancel-btn">
         <a
-          [class.active]="personalDetailsForm.invalid"
           *ngIf="enableEdit"
           target="_blank"
           (click)="updateDetails()"
